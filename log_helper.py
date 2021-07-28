@@ -6,19 +6,18 @@ from datetime import datetime
 
 
 client = InfluxDBClient(database='imperva')
-filenames = [_ for _ in os.listdir('stats')]
+#filenames = [_ for _ in os.listdir('stats')]
 
 
-def timeSplit(file):
-    print('get file {}'.format(file.name))
+def timeSplit(file, measurement):
     sect = groupby(csv.DictReader(file), lambda x: x["TimeStamp"])
     for i in sect:
-        rework(*i)
+        rework(measurement, *i)
 
 
-def rework(time, data):
+def rework(measurement, time, data):
     fields = {i["IndicationName"]: i for i in data}
-    ret = nullPayload(time)
+    ret = nullPayload(time, measurement)
     for f, v in fields.items():
         ret[0]['fields'].update(
             {
@@ -26,12 +25,11 @@ def rework(time, data):
                 f+'Avg': int(v['AverageValue']),
             })
     client.write_points(ret)
-    print('written {}'.format(ret))
 
 
-def nullPayload (time):
+def nullPayload(time, measurement='8th'):
     return [{
-        'measurement': '8th',
+        'measurement': measurement,
         'time': datetime.strptime(time, '%Y-%m-%d %H:%M:%S').isoformat()+'Z',
         'fields': {}
     }]
