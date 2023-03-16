@@ -3,10 +3,16 @@ import os
 from itertools import groupby
 from influxdb import InfluxDBClient
 from datetime import datetime
+import functools
 
 
 client = InfluxDBClient(database='imperva')
-#filenames = [_ for _ in os.listdir('stats')]
+filenames = os.listdir()
+
+
+def path_upload(path):
+    with open(path) as file:
+        return functools.partial(timeSplit, file = file)
 
 
 def timeSplit(file, measurement):
@@ -33,6 +39,10 @@ def nullPayload(time, measurement='8th'):
         'time': datetime.strptime(time, '%Y-%m-%d %H:%M:%S').isoformat()+'Z',
         'fields': {}
     }]
+
+def process_folder(path=None):
+    for i in range(4000):
+        timeSplit(open(f"{path}/PerformanceMonitorIndications{i}.csv"), measurement='gw3')
 
 if __name__ == "__main__":
     for i in filenames:

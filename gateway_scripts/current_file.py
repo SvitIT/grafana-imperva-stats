@@ -1,7 +1,7 @@
 import requests
 
-a = open('.PerformanceMonitorIndicationsRotatorPersistentIndexes.bin')
-magic_numbers = list(map(ord, a.readlines()[0]))
+a = open('gw_kbu/gw1/PerformanceMonitorIndications/.PerformanceMonitorIndicationsRotatorPersistentIndexes.bin', 'rb')
+magic_numbers = list(a.read())
 current = magic_numbers[33]*256+magic_numbers[32]
 
 
