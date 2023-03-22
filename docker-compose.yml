@@ -14,6 +14,8 @@ services:
     image: "influxdb:1.8"
     ports: 
       - "8086:8086"
+    volumes:
+    - influxdb-storage:/var/lib/influxdb
 
   grafana:
     container_name: grafana
@@ -23,4 +25,10 @@ services:
     depends_on:
       - influx
     volumes:
+      - grafana-storage:/var/lib/grafana
       - ./grafana-provisioning/:/etc/grafana/provisioning
+
+
+volumes:
+  influxdb-storage:
+  grafana-storage:
