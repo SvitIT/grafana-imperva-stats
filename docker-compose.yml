@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  api:
+    container_name: api
+    build: .
+    ports:
+      - "8000:5000"
+    depends_on:
+      - influx
+    stop_signal: SIGINT
+
+  influx:
+    container_name: influx
+    image: "influxdb:1.8"
+    ports: 
+      - "8086:8086"
+
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana-oss"
+    ports: 
+      - "3000:3000"
+    depends_on:
+      - influx
