@@ -5,9 +5,6 @@ from client import write_points
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = './stats'
-ALLOWED_EXTENSIONS = {'csv', 'zip'}
-
 
 upload_form = '''
     <!doctype html>

@@ -22,3 +22,5 @@ services:
       - "3000:3000"
     depends_on:
       - influx
+    volumes:
+      - ./grafana-provisioning/:/etc/grafana/provisioning
