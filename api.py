@@ -1,3 +1,8 @@
+"""
+API backend, used for retrieving the zipfile with imperva logs
+"""
+
+
 from flask import Flask, request, redirect
 from iozip import ImpervaLog
 from client import write_points
