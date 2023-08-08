@@ -8,7 +8,7 @@ docker compose build
 docker compose up
 ```
 
-Api endpoint at `localhost:5000/upload_zip/\<measurement\>` to upload single archive with 4000 files to the desired measurement in influxdb
+Api endpoint at `localhost:8000/upload_zip/\<measurement\>` to upload single archive with 4000 files to the desired measurement in influxdb
 
 Grafana is up on `localhost:3000`, the user is default - admin, admin
 
