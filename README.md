@@ -3,7 +3,7 @@
 ## How to use
 
 ```
-git clone https://github.com/Chmele/grafana-imperva-stats.git .
+git clone https://github.com/SvitIT/grafana-imperva-stats.git .
 docker compose build
 docker compose up
 ```
